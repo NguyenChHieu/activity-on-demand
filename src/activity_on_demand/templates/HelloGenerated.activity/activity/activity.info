@@ -1,0 +1,6 @@
+[Activity]
+name = {name}
+bundle_id = {bundle_id}
+exec = {command}
+activity_version = {version}
+icon = activity-icon
