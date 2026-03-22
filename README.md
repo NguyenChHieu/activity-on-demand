@@ -1,78 +1,41 @@
 ### Project Idea: Sugar Activity on Demand
 
-Goal:
-Generate Sugar learning activities automatically from natural language prompts using AI.
+Generate Sugar learning activities automatically from natural language prompts using AI-oriented scaffolding.
 
-Example:
+## Package layout
 
+The project now exposes a Python package under `src/activity_on_demand/` with these core modules:
+
+- `cli.py` — command parsing, prompt capture, and command dispatch.
+- `generator.py` — placeholder orchestration for future LLM/spec generation.
+- `validator.py` — validation of required Sugar activity files.
+- `bundler.py` — assembly of generated activity bundles.
+- `templates/` — starter files for `HelloGenerated.activity`.
+
+## Commands
+
+Run the package directly:
+
+```bash
+python -m activity_on_demand init --output build
+python -m activity_on_demand validate build/HelloGenerated.activity
+python -m activity_on_demand bundle build/HelloGenerated.activity --output dist
 ```
-Prompt:
-"Create a multiplication quiz for grade 3 students"
+
+Or use the installed console script:
+
+```bash
+activity-on-demand init
 ```
 
-System generates:
+## Generated Sugar layout
 
-```
-MultiplicationQuiz.activity/
-  activity.info
+The generated activity follows Sugar conventions:
+
+```text
+<Name>.activity/
+  activity/activity.info
   main.py
+  icons/
   assets/
 ```
-
-The generated activity can then be installed and launched in Sugar.
-
----
-
-# Proposed System Architecture
-
-```
-User prompt
-   ↓
-LLM generation
-   ↓
-Activity specification (JSON)
-   ↓
-Template engine
-   ↓
-Activity code generation
-   ↓
-Validation
-   ↓
-Activity bundle
-   ↓
-Launch inside Sugar
-```
-
----
-
-# Core Components of the System
-
-### Prompt interface
-
-CLI or web UI for generating activities.
-
-### LLM generator
-
-Large language model generates activity code or specifications.
-
-### Template engine
-
-Converts generated specification into valid Sugar activity structure.
-
-### Validation layer
-
-Checks:
-
-* required files
-* dependencies
-* execution entry point
-
-### Activity bundler
-
-Packages activity into `.activity` directory.
-
-### Runner
-
-Installs and launches the generated activity.
-
----
